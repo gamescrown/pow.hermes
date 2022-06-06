@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using com.adjust.sdk;
 using Firebase.Analytics;
 using GameAnalyticsSDK;
+using pow.aidkit;
 using UnityEngine;
 
 namespace pow.hermes
@@ -83,24 +84,44 @@ namespace pow.hermes
             GameAnalytics.NewBusinessEvent(currency, amount, itemType, sku, redirectFrom, parameters);
         }
 
-        public static void GADesignEvent(string eventArg1, string eventArg2)
-        {
-            if (GAInit.InstanceExists && !GAInit.Instance.HasInitializeBeenCalled) return;
-            GameAnalytics.NewDesignEvent($"{eventArg1}:{eventArg2}");
-        }
-
         public static void GADesignEvent(string eventArg1, string eventArg2, Dictionary<string, object> fields)
         {
             if (GAInit.InstanceExists && !GAInit.Instance.HasInitializeBeenCalled) return;
             GameAnalytics.NewDesignEvent($"{eventArg1}:{eventArg2}", fields);
         }
 
+        public static void GADesignEvent(string eventArg1, string eventArg2)
+        {
+            if (GAInit.InstanceExists && !GAInit.Instance.HasInitializeBeenCalled) return;
+            GameAnalytics.NewDesignEvent($"{eventArg1}:{eventArg2}");
+        }
+
+
+        public static void GADesignEvent(string eventArg1)
+        {
+            if (GAInit.InstanceExists && !GAInit.Instance.HasInitializeBeenCalled) return;
+            GameAnalytics.NewDesignEvent($"{eventArg1}");
+        }
 
         public static void GAResourceEvent(GAResourceFlowType flowType, string resourceCurrency, string itemType,
             string itemName, int amount)
         {
             if (GAInit.InstanceExists && !GAInit.Instance.HasInitializeBeenCalled) return;
-            GameAnalytics.NewResourceEvent(flowType, resourceCurrency, amount, itemType, itemName);
+            var tmpResourceCurrencyList = resourceCurrency.Split('_');
+            var tmpResourceCurrency = tmpResourceCurrencyList[0];
+            for (int i = 1; i < tmpResourceCurrencyList.Length; i++)
+            {
+                tmpResourceCurrency += Converter.FirstCharToUpper(tmpResourceCurrencyList[i].Replace("_", ""));
+            }
+
+            var itemTypeList = itemType.Split('_');
+            var itemTypeName = itemTypeList[0];
+            for (int i = 1; i < itemTypeList.Length; i++)
+            {
+                itemTypeName += Converter.FirstCharToUpper(itemTypeList[i].Replace("_", ""));
+            }
+
+            GameAnalytics.NewResourceEvent(flowType, tmpResourceCurrency, amount, itemTypeName, itemName);
         }
 
         public static void AdjustIAPEvents(string productIdentifierKey, float price, string transaction,
@@ -124,22 +145,26 @@ namespace pow.hermes
             Adjust.trackEvent(adjustEvent);
         }
 
+
         public static void SetUserPropertyForLevel(int level)
         {
-            FirebaseAnalytics.SetUserProperty("level_id", $"level_{level:0000}");
-            Debug.Log($"Set user level property successfully: level_{level:0000}");
+            SetUserProperty("level_id", $"level_{level:0000}");
+        }
+
+        public static void SetUserPropertyForMusic(bool isOn)
+        {
+            string s = isOn ? "on" : "off";
+            SetUserProperty("music", s);
         }
 
         public static void SetPurchaserUserProperty()
         {
-            FirebaseAnalytics.SetUserProperty("purchaser_user", "true");
-            Debug.Log($"Set user purchaser status property successfully: purchaser");
+            SetUserProperty("purchaser_user", "true");
         }
 
         public static void SetNoAdsPurchaserUserProperty()
         {
-            FirebaseAnalytics.SetUserProperty("no_ads", "true");
-            Debug.Log($"Set user no ads purchaser status property successfully: no_ads_purchaser");
+            SetUserProperty("no_ads", "true");
         }
 
         public static void SetUserProperty(string key, string value)
