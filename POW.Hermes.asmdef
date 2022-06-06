@@ -1,0 +1,19 @@
+{
+    "name": "POW.hermes",
+    "rootNamespace": "",
+    "references": [
+        "Pow.AidKit",
+        "POW.Adjust",
+        "GameAnalyticsSDK.Editor",
+        "GameAnalyticsSDK"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
