@@ -18,9 +18,9 @@ namespace pow.hermes
 
         public static void LogFirebaseParametricEvent(string eventName, Parameter[] parameters)
         {
-            if (!EventController.Instance.PoliciesIsAccepted || !FirebaseInit.Instance.isFirebaseInitialized)
+            if (!BaseEventController.Instance.PoliciesIsAccepted || !FirebaseInit.Instance.isFirebaseInitialized)
             {
-                EventController.Instance.OnPrivacyPoliciyAcceptedEventActions.Enqueue(() =>
+                BaseEventController.Instance.OnPrivacyPoliciyAcceptedEventActions.Enqueue(() =>
                 {
                     Debug.Log("Event Dequeue: " + eventName);
                     LogFirebaseParametricEvent(eventName, parameters);
@@ -37,9 +37,9 @@ namespace pow.hermes
 
         public static void LogFirebaseEvent(string eventName)
         {
-            if (!EventController.Instance.PoliciesIsAccepted || !FirebaseInit.Instance.isFirebaseInitialized)
+            if (!BaseEventController.Instance.PoliciesIsAccepted || !FirebaseInit.Instance.isFirebaseInitialized)
             {
-                EventController.Instance.OnPrivacyPoliciyAcceptedEventActions.Enqueue(() =>
+                BaseEventController.Instance.OnPrivacyPoliciyAcceptedEventActions.Enqueue(() =>
                 {
                     Debug.Log("Event Dequeue: " + eventName);
                     FirebaseAnalytics.LogEvent(eventName);
@@ -145,6 +145,21 @@ namespace pow.hermes
             Adjust.trackEvent(adjustEvent);
         }
 
+        public static void AdjustApplovinAdRevenueEvent(
+            double revenue,
+            string networkName,
+            string adUnitIdentifier,
+            string placement)
+        {
+            AdjustAdRevenue adjustAdRevenue = new AdjustAdRevenue(AdjustConfig.AdjustAdRevenueSourceAppLovinMAX);
+
+            adjustAdRevenue.setRevenue(revenue, "USD");
+            adjustAdRevenue.setAdRevenueNetwork(networkName);
+            adjustAdRevenue.setAdRevenueUnit(adUnitIdentifier);
+            adjustAdRevenue.setAdRevenuePlacement(placement);
+
+            Adjust.trackAdRevenue(adjustAdRevenue);
+        }
 
         public static void SetUserPropertyForLevel(int level)
         {

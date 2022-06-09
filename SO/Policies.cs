@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace pow.hermes
 {
-    [CreateAssetMenu(fileName = "Policies", menuName = "POW_SDK/Hermes", order = 0)]
+    [CreateAssetMenu(fileName = "Policies", menuName = "POW_SDK/Hermes/Policies", order = 0)]
     public class Policies : StoredScriptableObject
     {
         [SerializeField] private bool isAccepted;

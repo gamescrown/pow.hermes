@@ -49,7 +49,7 @@ namespace pow.hermes
         public void SetCollectionEnabled(bool enable)
         {
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(enable);
-            EventController.Instance.SendQueuedEvents();
+            BaseEventController.Instance.SendQueuedEvents();
         }
 
         private void InitFirebaseRemoteConfig()
