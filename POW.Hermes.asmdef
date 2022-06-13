@@ -3,9 +3,9 @@
     "rootNamespace": "",
     "references": [
         "Pow.AidKit",
+        "POW.Adjust",
         "GameAnalyticsSDK.Editor",
-        "GameAnalyticsSDK",
-        "Adjust"
+        "GameAnalyticsSDK"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
