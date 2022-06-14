@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Firebase;
@@ -46,8 +47,9 @@ namespace pow.hermes
             });
         }
 
-        public void SetCollectionEnabled(bool enable)
+        public IEnumerator SetCollectionEnabled(bool enable)
         {
+            yield return new WaitUntil(() => isRemoteConfigInitialized);
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(enable);
             BaseEventController.Instance.SendQueuedEvents();
         }
