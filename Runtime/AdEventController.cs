@@ -68,15 +68,15 @@ namespace pow.hermes
         private void SendCpmEvent(CpmKey cpmKey, double ecpm)
         {
             double revenueUsd = ecpm / (1000 * 100);
-            EventSender.LogFirebaseParametricEvent(
-                cpmKey.ToString(),
-                new Parameter[]
-                {
-                    new Parameter(FirebaseAnalytics.ParameterCurrency, "USD"),
-                    new Parameter(FirebaseAnalytics.ParameterValue, revenueUsd),
-                    new Parameter(EcpmKey, ecpm)
-                }
-            );
+            //EventSender.LogFirebaseParametricEvent(
+            //    cpmKey.ToString(),
+            //    new Parameter[]
+            //    {
+            //        new Parameter(FirebaseAnalytics.ParameterCurrency, "USD"),
+            //        new Parameter(FirebaseAnalytics.ParameterValue, revenueUsd),
+            //        new Parameter(EcpmKey, ecpm)
+            //    }
+            //);
             EventSender.AdjustEcpmEvents(adjustEventHandler.GetAjustEventTokenByKey(cpmKey.ToString()), revenueUsd);
         }
 

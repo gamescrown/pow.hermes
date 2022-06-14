@@ -23,16 +23,18 @@ namespace pow.hermes
                 BaseEventController.Instance.OnPrivacyPoliciyAcceptedEventActions.Enqueue(() =>
                 {
                     Debug.Log("Event Dequeue: " + eventName);
-                    LogFirebaseParametricEvent(eventName, parameters);
+                    //LogFirebaseParametricEvent(eventName, parameters);
                 });
             }
             else
             {
-                FirebaseAnalytics.LogEvent(
-                    eventName,
-                    parameters
-                );
+                //FirebaseAnalytics.LogEvent(
+                //    eventName,
+                //    parameters
+                //);
             }
+
+            Debug.Log($"[Test Firebase Analytics] Log firebase parametric event: event key: {eventName}");
         }
 
         public static void LogFirebaseEvent(string eventName)
@@ -42,13 +44,15 @@ namespace pow.hermes
                 BaseEventController.Instance.OnPrivacyPoliciyAcceptedEventActions.Enqueue(() =>
                 {
                     Debug.Log("Event Dequeue: " + eventName);
-                    FirebaseAnalytics.LogEvent(eventName);
+                    //FirebaseAnalytics.LogEvent(eventName);
                 });
             }
             else
             {
-                FirebaseAnalytics.LogEvent(eventName);
+                //FirebaseAnalytics.LogEvent(eventName);
             }
+
+            Debug.Log($"[Test Firebase Analytics] Log firebase event: event key: {eventName}");
         }
 
         public static void GAParametricLevelStartEvent(string progression1, Dictionary<string, object> parameters)
@@ -184,7 +188,7 @@ namespace pow.hermes
 
         public static void SetUserProperty(string key, string value)
         {
-            FirebaseAnalytics.SetUserProperty(key, value);
+            //FirebaseAnalytics.SetUserProperty(key, value);
             Debug.Log($"Set user user property {key} successfully: {value}");
         }
     }
