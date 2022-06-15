@@ -10,6 +10,8 @@ namespace pow.hermes
         [SerializeField] private bool isAccepted;
         [SerializeField] private string foodPrivacyLink;
         [SerializeField] private string foodTermsLink;
+        [SerializeField] private int hasUserConsent = -1;
+
         public string PrivacyLink => foodPrivacyLink;
 
         public string TermsLink => foodTermsLink;
@@ -24,17 +26,33 @@ namespace pow.hermes
             }
         }
 
+        public int HasUserConsent
+        {
+            get => hasUserConsent;
+            set
+            {
+                hasUserConsent = value;
+                Save(Write);
+                Debug.Log("HasUserConsent " + hasUserConsent);
+            }
+        }
+
         private void OnEnable()
         {
             string encryptedName = TextEncryption.Encrypt(name, Password);
             FilePath = Path.Combine(Application.persistentDataPath, encryptedName);
             TempFilePath = Path.Combine(Application.persistentDataPath, $"temp{encryptedName}");
-            Load(reader => { isAccepted = reader.ReadBoolean(); });
+            Load(reader =>
+            {
+                isAccepted = reader.ReadBoolean();
+                hasUserConsent = reader.ReadInt32();
+            });
         }
 
         private void Write(BinaryWriter writer)
         {
             writer.Write(isAccepted);
+            writer.Write(hasUserConsent);
         }
     }
 }
