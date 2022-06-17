@@ -17,6 +17,7 @@ namespace pow.hermes
         public bool PoliciesIsAccepted => policies.IsAccepted;
         public Queue<Action> OnPrivacyPoliciyAcceptedEventActions = new Queue<Action>();
 
+        private readonly string IsGivenKey = "is_given";
 
         public void SendQueuedEvents()
         {
@@ -25,6 +26,28 @@ namespace pow.hermes
             {
                 OnPrivacyPoliciyAcceptedEventActions.Dequeue().Invoke();
             }
+        }
+
+        // Send Notification Permission event in only IOS region, so can not show usage
+        // EventController instance is not exist when this function called.
+        // If this event is necessary, change location of Analytics Initialization and EventSender scripts
+        public void SendNotificationPermissionViewEvent()
+        {
+            EventSender.LogFirebaseEvent("notification_permission_view");
+        }
+
+        // Send Notification Permission event in only IOS region, so can not show usage
+        // EventController instance is not exist when this function called.
+        // If this event is necessary, change location of Analytics Initialization and EventSender scripts
+        public void SendNotificationPermissionPassEvent(bool isGiven)
+        {
+            EventSender.LogFirebaseParametricEvent(
+                "notification_permission_pass",
+                new Parameter[]
+                {
+                    new Parameter(IsGivenKey, isGiven.ToString())
+                }
+            );
         }
     }
 }
