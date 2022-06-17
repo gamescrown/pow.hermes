@@ -51,6 +51,39 @@ namespace pow.hermes
             }
         }
 
+        public static void LogFirebaseEvent(string eventName, string parameterName, string parameterValue)
+        {
+            if (!BaseEventController.Instance.PoliciesIsAccepted || !FirebaseInit.Instance.isFirebaseInitialized)
+            {
+                BaseEventController.Instance.OnPrivacyPoliciyAcceptedEventActions.Enqueue(() =>
+                {
+                    Debug.Log("Event Dequeue: " + eventName);
+                    FirebaseAnalytics.LogEvent(eventName, parameterName, parameterValue);
+                });
+            }
+            else
+            {
+                FirebaseAnalytics.LogEvent(eventName, parameterName, parameterValue);
+            }
+        }
+
+        public static void LogFirebaseEvent(string eventName, string parameterName, int parameterValue)
+        {
+            if (!BaseEventController.Instance.PoliciesIsAccepted || !FirebaseInit.Instance.isFirebaseInitialized)
+            {
+                BaseEventController.Instance.OnPrivacyPoliciyAcceptedEventActions.Enqueue(() =>
+                {
+                    Debug.Log("Event Dequeue: " + eventName);
+                    FirebaseAnalytics.LogEvent(eventName, parameterName, parameterValue);
+                });
+            }
+            else
+            {
+                FirebaseAnalytics.LogEvent(eventName, parameterName, parameterValue);
+            }
+        }
+
+
         public static void GAParametricLevelStartEvent(string progression1, Dictionary<string, object> parameters)
         {
             if (GAInit.InstanceExists && !GAInit.Instance.HasInitializeBeenCalled) return;
