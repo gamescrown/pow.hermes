@@ -16,6 +16,8 @@ namespace pow.hermes
         public bool isFirebaseInitialized;
         public bool isRemoteConfigInitialized;
 
+        [SerializeField] private GameEvent onRemoteConfigFetchFailed;
+
         private void Start()
         {
             Init();
@@ -93,6 +95,7 @@ namespace pow.hermes
 
                     break;
                 case LastFetchStatus.Failure:
+                    onRemoteConfigFetchFailed?.Invoke();
                     switch (remoteConfigInfo.LastFetchFailureReason)
                     {
                         case FetchFailureReason.Error:

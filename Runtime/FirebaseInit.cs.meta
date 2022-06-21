@@ -3,7 +3,8 @@ guid: 104ac08b4aa3448af8e7759af7d0a7f7
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - onRemoteConfigFetchFailed: {fileID: 11400000, guid: 3d08c99c912bb425b8d83988f19c8285, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
