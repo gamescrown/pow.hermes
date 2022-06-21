@@ -8,13 +8,13 @@ namespace pow.hermes
     public class Policies : StoredScriptableObject
     {
         [SerializeField] private bool isAccepted;
-        [SerializeField] private string foodPrivacyLink;
-        [SerializeField] private string foodTermsLink;
+        [SerializeField] private string privacyLink;
+        [SerializeField] private string termsLink;
         [SerializeField] private int hasUserConsent = -1;
 
-        public string PrivacyLink => foodPrivacyLink;
+        public string PrivacyLink => privacyLink;
 
-        public string TermsLink => foodTermsLink;
+        public string TermsLink => termsLink;
 
         public bool IsAccepted
         {
