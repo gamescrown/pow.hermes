@@ -112,6 +112,7 @@ namespace pow.hermes
                     new Parameter(AdMediumKey, interstitialTag)
                 }
             );
+            EventSender.LogAdjustEvent(adjustEventHandler.GetAdjustEventTokenByKey(interstitialTag));
         }
 
         public void SendInterstitialFailedShowEvent(string adNetworkName, string interstitialTag)
@@ -215,6 +216,7 @@ namespace pow.hermes
                     new Parameter(AdMediumKey, rewardedVideoTag)
                 }
             );
+            EventSender.LogAdjustEvent(adjustEventHandler.GetAdjustEventTokenByKey(rewardedVideoTag));
         }
 
         #endregion
@@ -232,6 +234,7 @@ namespace pow.hermes
                     new Parameter(AdNetworkNameKey, adNetworkName)
                 }
             );
+            EventSender.LogAdjustEvent(adjustEventHandler.GetAdjustEventTokenByKey("banner_view"));
         }
 
         public void SendBannerClickedEvent(string adNetworkName)
