@@ -79,7 +79,7 @@ namespace pow.hermes
                     new Parameter(EcpmKey, ecpm)
                 }
             );
-            EventSender.AdjustEcpmEvents(adjustEventHandler.GetAjustEventTokenByKey(cpmKey.ToString()), revenueUsd);
+            EventSender.AdjustEcpmEvents(adjustEventHandler.GetAdjustEventTokenByKey(cpmKey.ToString()), revenueUsd);
         }
 
         #endregion
