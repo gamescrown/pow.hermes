@@ -8,6 +8,11 @@ namespace pow.hermes
     {
         private List<PowAdjustEvent> adjustEvents = new List<PowAdjustEvent>();
 
+        public void AddPowAdjustEvent(PowAdjustEvent powAdjustEvent)
+        {
+            adjustEvents.Add(powAdjustEvent);
+        }
+
         public string GetAjustEventTokenByKey(string key)
         {
             PowAdjustEvent powAdjustEvent = adjustEvents.Find(e => e._key == key);
