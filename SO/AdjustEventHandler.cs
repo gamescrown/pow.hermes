@@ -16,7 +16,9 @@ namespace pow.hermes
         public string GetAdjustEventTokenByKey(string key)
         {
             PowAdjustEvent powAdjustEvent = _adjustEvents.Find(e => e._key == key);
-            return powAdjustEvent == null ? string.Empty : _adjustEvents.Find(e => e._key == key)._token;
+            if (powAdjustEvent != null)
+                Debug.Log($"[GetAdjustEventTokenByKey] Key: {powAdjustEvent._key},Token: {powAdjustEvent._token}");
+            return powAdjustEvent == null ? string.Empty : powAdjustEvent._token;
         }
     }
 }
