@@ -9,6 +9,7 @@ namespace pow.hermes
     {
         [SerializeField] private AdjustEventHandler adjustEventHandler;
 
+        private readonly int ecpm1 = 1;
         private readonly int ecpm10 = 1000;
         private readonly int ecpm100 = 10000;
         private readonly int ecpm500 = 50000;
@@ -23,6 +24,7 @@ namespace pow.hermes
 
         public void SendEcpmEvent(double ecpm)
         {
+            SendCpmEvent(CpmKey.CPMgreaterthan1, ecpm); // for testing
             if (ecpm < ecpm10)
             {
                 SendCpmEvent(CpmKey.newCPMlessthan10, ecpm);

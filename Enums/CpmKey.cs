@@ -8,6 +8,7 @@ namespace pow.hermes
         newCPMgreaterthan500,
         newCPMgreaterthan1000,
         AdRevenue_Total,
-        CPM10_rewardedad
+        CPM10_rewardedad,
+        CPMgreaterthan1
     }
 }
