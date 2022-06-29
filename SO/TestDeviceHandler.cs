@@ -14,7 +14,7 @@ namespace pow.hermes
         // Trigger this function from firebase remote config controller
         public void AddTestUsers(string json)
         {
-            Debug.Log($"[TestUsersHandler] {json}");
+            Debug.Log($"[TestDeviceHandler] {json}");
             var testUsers = JsonUtility.FromJson<TestDeviceList>(json);
             _testDevices = testUsers.testDevices.ToList();
             GetDeviceAdId();
@@ -22,6 +22,7 @@ namespace pow.hermes
 
         private void GetDeviceAdId()
         {
+            Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync...");
             Application.RequestAdvertisingIdentifierAsync(
                 (advertisingId, trackingEnabled, error) =>
                 {
