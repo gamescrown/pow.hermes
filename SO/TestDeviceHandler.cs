@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using pow.aidkit;
 using UnityEngine;
-using UnityEngine.iOS;
+
+//using UnityEngine.iOS;
 
 namespace pow.hermes
 {
@@ -24,7 +25,7 @@ namespace pow.hermes
         private void GetDeviceAdId()
         {
             Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync begin...");
-            Debug.Log($"[TestDeviceHandler] advertisingId {Device.advertisingIdentifier}");
+            //Debug.Log($"[TestDeviceHandler] advertisingId {Device.advertisingIdentifier}");
 
             Application.RequestAdvertisingIdentifierAsync(
                 (advertisingId, trackingEnabled, error) =>
