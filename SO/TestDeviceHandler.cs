@@ -27,16 +27,14 @@ namespace pow.hermes
             Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync begin...");
             //Debug.Log($"[TestDeviceHandler] advertisingId {Device.advertisingIdentifier}");
 
-            Application.RequestAdvertisingIdentifierAsync(
-                (advertisingId, trackingEnabled, error) =>
+            MiniIT.Utils.AdvertisingIdFetcher.RequestAdvertisingId(advertisingId =>
+            {
+                Debug.Log("[TestDeviceHandler] advertisingId = " + advertisingId);
+                if (_testDevices.Any(testDevice => testDevice.adID == advertisingId))
                 {
-                    Debug.Log($"[TestDeviceHandler] advertisingId {advertisingId} , {trackingEnabled}, {error}");
-                    if (_testDevices.Any(testDevice => testDevice.adID == advertisingId))
-                    {
-                        onTestDeviceFetched?.Invoke();
-                    }
+                    onTestDeviceFetched?.Invoke();
                 }
-            );
+            });
             Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync end...");
         }
     }
