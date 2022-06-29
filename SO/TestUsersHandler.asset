@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1095b14628af047c4bb7f30811a11353, type: 3}
   m_Name: TestUsersHandler
   m_EditorClassIdentifier: 
-  onTestUserFetched: {fileID: 11400000, guid: 7e2cbc0c92f6a4801b579cfced40a1d2, type: 2}
+  onTestDeviceFetched: {fileID: 11400000, guid: 7e2cbc0c92f6a4801b579cfced40a1d2, type: 2}
