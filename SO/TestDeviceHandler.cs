@@ -23,9 +23,9 @@ namespace pow.hermes
 
         private void GetDeviceAdId()
         {
-            Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync...");
+            Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync begin...");
             Debug.Log($"[TestDeviceHandler] advertisingId {Device.advertisingIdentifier}");
-            
+
             Application.RequestAdvertisingIdentifierAsync(
                 (advertisingId, trackingEnabled, error) =>
                 {
@@ -36,6 +36,7 @@ namespace pow.hermes
                     }
                 }
             );
+            Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync end...");
         }
     }
 }
