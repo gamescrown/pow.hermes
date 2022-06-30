@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using pow.aidkit;
 using UnityEngine;
-
-//using UnityEngine.iOS;
+#if UNITY_IOS
+using UnityEngine.iOS;
+#endif
 
 namespace pow.hermes
 {
@@ -19,10 +20,15 @@ namespace pow.hermes
             Debug.Log($"[TestDeviceHandler] {json}");
             var testUsers = JsonUtility.FromJson<TestDeviceList>(json);
             _testDevices = testUsers.testDevices.ToList();
-            GetDeviceAdId();
+#if UNITY_EDITOR
+#elif UNITY_ANDROID
+            GetDeviceAdIdOnAndroid();
+#elif UNITY_IOS
+            GetDeviceAdIdOnIOS();
+#endif
         }
 
-        private void GetDeviceAdId()
+        private void GetDeviceAdIdOnAndroid()
         {
             Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync begin...");
             //Debug.Log($"[TestDeviceHandler] advertisingId {Device.advertisingIdentifier}");
@@ -37,6 +43,32 @@ namespace pow.hermes
             }
 
             Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync end...");
+        }
+
+        private void GetDeviceAdIdOnIOS()
+        {
+#if UNITY_IOS
+            Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync begin...");
+            var advertisingId = Device.advertisingIdentifier;
+            Debug.Log($"[TestDeviceHandler] adID {advertisingId}");
+
+            Application.RequestAdvertisingIdentifierAsync(
+                (string advertisingId, bool trackingEnabled, string error) =>
+                {
+                    Debug.Log("[TestDeviceHandler] advertisingId 2 " + advertisingId + " " + trackingEnabled + " " +
+                              error);
+                }
+            );
+
+            if (_testDevices.Any(testDevice => testDevice.adID == advertisingId))
+            {
+                Debug.Log($"[TestDeviceHandler] Ad Id found on list");
+                onTestDeviceFetched?.Invoke();
+                Debug.Log($"[TestDeviceHandler] Ad Id found on list action invoked");
+            }
+
+            Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync end...");
+#endif
         }
     }
 }
