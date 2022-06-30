@@ -13,6 +13,9 @@ namespace pow.hermes
     {
         [SerializeField] private GameEvent onTestDeviceFetched;
         private List<TestDevice> _testDevices = new List<TestDevice>();
+        private string _adId;
+
+        public string AdId => _adId;
 
         // Trigger this function from firebase remote config controller
         public void AddTestUsers(string json)
@@ -32,10 +35,10 @@ namespace pow.hermes
         {
             Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync begin...");
             //Debug.Log($"[TestDeviceHandler] advertisingId {Device.advertisingIdentifier}");
-            var advertisingId = AdvertisementIdController.Instance.GetAdvertisingId();
-            Debug.Log($"[TestDeviceHandler] adID {advertisingId}");
+            _adId = AdvertisementIdController.Instance.GetAdvertisingId();
+            Debug.Log($"[TestDeviceHandler] adID {_adId}");
 
-            if (_testDevices.Any(testDevice => testDevice.adID == advertisingId))
+            if (_testDevices.Any(testDevice => testDevice.adID == _adId))
             {
                 Debug.Log($"[TestDeviceHandler] Ad Id found on list");
                 onTestDeviceFetched?.Invoke();
@@ -45,22 +48,14 @@ namespace pow.hermes
             Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync end...");
         }
 
-        private void GetDeviceAdIdOnIOS()
+        public void GetDeviceAdIdOnIOS()
         {
 #if UNITY_IOS
             Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync begin...");
-            var advertisingId = Device.advertisingIdentifier;
-            Debug.Log($"[TestDeviceHandler] adID {advertisingId}");
+            _adId = Device.advertisingIdentifier;
+            Debug.Log($"[TestDeviceHandler] adID {_adId}");
 
-            Application.RequestAdvertisingIdentifierAsync(
-                (string advertisingId, bool trackingEnabled, string error) =>
-                {
-                    Debug.Log("[TestDeviceHandler] advertisingId 2 " + advertisingId + " " + trackingEnabled + " " +
-                              error);
-                }
-            );
-
-            if (_testDevices.Any(testDevice => testDevice.adID == advertisingId))
+            if (_testDevices.Any(testDevice => testDevice.adID == _adId))
             {
                 Debug.Log($"[TestDeviceHandler] Ad Id found on list");
                 onTestDeviceFetched?.Invoke();
