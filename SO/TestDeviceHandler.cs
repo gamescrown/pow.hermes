@@ -26,7 +26,7 @@ namespace pow.hermes
         {
             Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync begin...");
             //Debug.Log($"[TestDeviceHandler] advertisingId {Device.advertisingIdentifier}");
-            var advertisingId = AdvertisementIdController.Instance.GetAdvertisingId()
+            var advertisingId = AdvertisementIdController.Instance.GetAdvertisingId();
             Debug.Log($"[TestDeviceHandler] adID {advertisingId}");
             Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync end...");
 
