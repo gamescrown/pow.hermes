@@ -28,12 +28,15 @@ namespace pow.hermes
             //Debug.Log($"[TestDeviceHandler] advertisingId {Device.advertisingIdentifier}");
             var advertisingId = AdvertisementIdController.Instance.GetAdvertisingId();
             Debug.Log($"[TestDeviceHandler] adID {advertisingId}");
-            Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync end...");
 
             if (_testDevices.Any(testDevice => testDevice.adID == advertisingId))
             {
+                Debug.Log($"[TestDeviceHandler] Ad Id found on list");
                 onTestDeviceFetched?.Invoke();
+                Debug.Log($"[TestDeviceHandler] Ad Id found on list action invoked");
             }
+
+            Debug.Log($"[TestDeviceHandler] RequestAdvertisingIdentifierAsync end...");
         }
     }
 }
