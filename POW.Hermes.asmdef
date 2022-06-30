@@ -5,8 +5,7 @@
         "Pow.AidKit",
         "POW.Adjust",
         "GameAnalyticsSDK.Editor",
-        "GameAnalyticsSDK",
-        "MiniIT.AdvertisingIdFetcher"
+        "GameAnalyticsSDK"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
