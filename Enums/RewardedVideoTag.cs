@@ -23,6 +23,8 @@ namespace pow.hermes
         star_chest_multiply_gold_rew,
         level_chest_multiply_gold_rew,
         daily_login_multiply_rewards_rew,
-        fortune_path_multiply_gold_rew
+        fortune_path_multiply_gold_rew,
+        inter_level_3x_coin_rew,
+        refill_lives_rew
     }
 }
