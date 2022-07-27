@@ -11,6 +11,9 @@ namespace pow.hermes
         pause_popup_close_button_int,
         level_pass_int,
         level_fail_out_of_slots_popup_close_int,
-        level_fail_time_is_up_popup_close_int
+        level_fail_time_is_up_popup_close_int,
+        level_pass_continue_int,
+        level_pass_home_int,
+        restart_level_int
     }
 }
