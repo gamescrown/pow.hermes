@@ -48,5 +48,11 @@ namespace pow.hermes
             isAccepted = reader.ReadBoolean();
             hasUserConsent = reader.ReadInt32();
         }
+
+        public override void Reset()
+        {
+            base.Reset();
+            isAccepted = false;
+        }
     }
 }
