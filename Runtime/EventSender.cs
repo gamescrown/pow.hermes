@@ -18,7 +18,7 @@ namespace pow.hermes
 
         public static void LogFirebaseParametricEvent(string eventName, Parameter[] parameters)
         {
-            if (!BaseEventController.Instance.PoliciesIsAccepted || !FirebaseInit.Instance.isFirebaseInitialized)
+            if (!FirebaseInit.Instance.isFirebaseInitialized)
             {
                 BaseEventController.Instance.OnPrivacyPoliciyAcceptedEventActions.Enqueue(() =>
                 {
@@ -37,7 +37,7 @@ namespace pow.hermes
 
         public static void LogFirebaseEvent(string eventName)
         {
-            if (!BaseEventController.Instance.PoliciesIsAccepted || !FirebaseInit.Instance.isFirebaseInitialized)
+            if (!FirebaseInit.Instance.isFirebaseInitialized)
             {
                 BaseEventController.Instance.OnPrivacyPoliciyAcceptedEventActions.Enqueue(() =>
                 {
@@ -53,7 +53,7 @@ namespace pow.hermes
 
         public static void LogFirebaseEvent(string eventName, string parameterName, string parameterValue)
         {
-            if (!BaseEventController.Instance.PoliciesIsAccepted || !FirebaseInit.Instance.isFirebaseInitialized)
+            if (!FirebaseInit.Instance.isFirebaseInitialized)
             {
                 BaseEventController.Instance.OnPrivacyPoliciyAcceptedEventActions.Enqueue(() =>
                 {
@@ -69,7 +69,7 @@ namespace pow.hermes
 
         public static void LogFirebaseEvent(string eventName, string parameterName, int parameterValue)
         {
-            if (!BaseEventController.Instance.PoliciesIsAccepted || !FirebaseInit.Instance.isFirebaseInitialized)
+            if (!FirebaseInit.Instance.isFirebaseInitialized)
             {
                 BaseEventController.Instance.OnPrivacyPoliciyAcceptedEventActions.Enqueue(() =>
                 {
