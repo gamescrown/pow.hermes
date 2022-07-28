@@ -32,6 +32,7 @@ namespace pow.hermes
                     eventName,
                     parameters
                 );
+                BaseEventController.Instance.SendQueuedEvents();
             }
         }
 
@@ -48,6 +49,7 @@ namespace pow.hermes
             else
             {
                 FirebaseAnalytics.LogEvent(eventName);
+                BaseEventController.Instance.SendQueuedEvents();
             }
         }
 
@@ -64,6 +66,7 @@ namespace pow.hermes
             else
             {
                 FirebaseAnalytics.LogEvent(eventName, parameterName, parameterValue);
+                BaseEventController.Instance.SendQueuedEvents();
             }
         }
 
@@ -80,6 +83,7 @@ namespace pow.hermes
             else
             {
                 FirebaseAnalytics.LogEvent(eventName, parameterName, parameterValue);
+                BaseEventController.Instance.SendQueuedEvents();
             }
         }
 

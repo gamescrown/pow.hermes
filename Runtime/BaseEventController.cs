@@ -21,9 +21,9 @@ namespace pow.hermes
 
         public void SendQueuedEvents()
         {
-            Debug.Log($"{OnPrivacyPoliciyAcceptedEventActions.Count} Queued events sending...");
             while (OnPrivacyPoliciyAcceptedEventActions.Count > 0)
             {
+                Debug.Log($"{OnPrivacyPoliciyAcceptedEventActions.Count} Queued events sending...");
                 OnPrivacyPoliciyAcceptedEventActions.Dequeue().Invoke();
             }
         }
