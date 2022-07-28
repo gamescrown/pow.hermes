@@ -22,7 +22,7 @@ namespace pow.hermes
             set
             {
                 isAccepted = value;
-                Save();
+                Save(Write);
             }
         }
 
@@ -32,21 +32,27 @@ namespace pow.hermes
             set
             {
                 hasUserConsent = value;
-                Save();
+                Save(Write);
                 Debug.Log("HasUserConsent " + hasUserConsent);
             }
         }
 
-        protected override void Write(BinaryWriter writer)
+        private void OnEnable()
+        {
+            string encryptedName = TextEncryption.Encrypt(name, Password);
+            FilePath = Path.Combine(Application.persistentDataPath, encryptedName);
+            TempFilePath = Path.Combine(Application.persistentDataPath, $"temp{encryptedName}");
+            Load(reader =>
+            {
+                isAccepted = reader.ReadBoolean();
+                hasUserConsent = reader.ReadInt32();
+            });
+        }
+
+        private void Write(BinaryWriter writer)
         {
             writer.Write(isAccepted);
             writer.Write(hasUserConsent);
-        }
-
-        protected override void Read(BinaryReader reader)
-        {
-            isAccepted = reader.ReadBoolean();
-            hasUserConsent = reader.ReadInt32();
         }
     }
 }
